@@ -1,7 +1,9 @@
 FROM alpine:3.5
 
+# Create the 'git' user with UID 1000 (instead of the default 100)
+RUN adduser -D -u 1000 -h /var/lib/git -g '' -s /bin/sh git
+
 # Install OpenSSH server and Gitolite
-# Unlock the automatically-created git user
 RUN set -x \
  && apk add --update gitolite openssh \
  && rm -rf /var/cache/apk/* \
